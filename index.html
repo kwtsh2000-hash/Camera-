@@ -1716,7 +1716,17 @@ async function uploadInBackground(blob, filename, timestamp) {
     if (data.ok) {
       state.stats.uploaded++;
       saveSettings();
-      updateStatsUI()
+      updateStatsUI();
+      showToast('', '', 1800);
+    } else {
+      throw new Error(data.description || '');
+    }
+  } catch (err) {
+    console.error('Upload failed:', err);
+    // إشعار صغير بدون تعطيل — الصورة اتحفظت محلياً
+    showToast('', '', 2500);
+  }
+}
 
 /* ============================================================
    🔄 تبديل الكاميرا
@@ -1988,4 +1998,4 @@ if (navigator.permissions && navigator.permissions.query) {
 }
 </script>
 </body>
- </html>
+</html>
